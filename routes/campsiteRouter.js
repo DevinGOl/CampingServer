@@ -211,12 +211,7 @@ campsiteRouter.route('/:campsiteId/comments/:commentId')
         if (campsite && campsite.comments.id(req.params.commentId)) {
             if((campsite.comments.id(req.params.commentId).author).equals(req.user._id)) {
                 console.log("This is the author");
-                if (req.body.rating) {
-                    campsite.comments.id(req.params.commentId).rating = req.body.rating;
-                }
-                if (req.body.text) {
-                    campsite.comments.id(req.params.commentId).text = req.body.text;
-                }
+                campsite.comments.id(req.params.commentId).remove();
                 campsite.save()
                 .then(campsite => {
                     res.statusCode = 200;
