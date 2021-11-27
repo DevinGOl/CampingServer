@@ -111,7 +111,7 @@ favoriteRouter.route('/:favoriteId')
             .then(favorite => {
                 if (favorite) {
                 const ind = favorite.campsites.indexOf(req.params.campsiteId);
-                if (ind > 0) {
+                if (ind >= 0) {
                     favorite.campsites.splice(ind, 1);
                 }
                 favorite.save()
@@ -127,7 +127,7 @@ favoriteRouter.route('/:favoriteId')
     } else {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain');
-        res.json(Favorite);
+        res.json(favorite);
     }}
 ).catch(err => next(err))
     })
